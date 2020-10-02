@@ -1,6 +1,8 @@
 package spring.start.Contoller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 import spring.start.services.NewJokeService;
 
 @Controller
@@ -12,9 +14,10 @@ public class MvcController {
         this.newJokeService = newJokeService;
     }
 
-    public String getNewJoke() {
-        return newJokeService.sayNewJoke();
+    @RequestMapping({"/",""})
+    public String getNewJoke(Model model) {
+        model.addAttribute("jokes",newJokeService.sayNewJoke());
+        return "chucknorris";
     }
-
 
 }
